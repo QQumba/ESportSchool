@@ -1,0 +1,12 @@
+D:\Study\3\AtRK\backend\ESportSchool\ESportSchool.DAL\bin\Debug\netstandard2.0\ESportSchool.DAL.deps.json
+D:\Study\3\AtRK\backend\ESportSchool\ESportSchool.DAL\bin\Debug\netstandard2.0\ESportSchool.DAL.dll
+D:\Study\3\AtRK\backend\ESportSchool\ESportSchool.DAL\obj\Debug\netstandard2.0\ESportSchool.DAL.csprojAssemblyReference.cache
+D:\Study\3\AtRK\backend\ESportSchool\ESportSchool.DAL\obj\Debug\netstandard2.0\ESportSchool.DAL.AssemblyInfoInputs.cache
+D:\Study\3\AtRK\backend\ESportSchool\ESportSchool.DAL\obj\Debug\netstandard2.0\ESportSchool.DAL.AssemblyInfo.cs
+D:\Study\3\AtRK\backend\ESportSchool\ESportSchool.DAL\bin\Debug\netstandard2.0\ESportSchool.DAL.pdb
+D:\Study\3\AtRK\backend\ESportSchool\ESportSchool.DAL\bin\Debug\netstandard2.0\ESportSchool.Domain.dll
+D:\Study\3\AtRK\backend\ESportSchool\ESportSchool.DAL\bin\Debug\netstandard2.0\ESportSchool.Domain.pdb
+D:\Study\3\AtRK\backend\ESportSchool\ESportSchool.DAL\obj\Debug\netstandard2.0\ESportSchool.DAL.csproj.CoreCompileInputs.cache
+D:\Study\3\AtRK\backend\ESportSchool\ESportSchool.DAL\obj\Debug\netstandard2.0\ESportSchool.DAL.csproj.CopyComplete
+D:\Study\3\AtRK\backend\ESportSchool\ESportSchool.DAL\obj\Debug\netstandard2.0\ESportSchool.DAL.dll
+D:\Study\3\AtRK\backend\ESportSchool\ESportSchool.DAL\obj\Debug\netstandard2.0\ESportSchool.DAL.pdb

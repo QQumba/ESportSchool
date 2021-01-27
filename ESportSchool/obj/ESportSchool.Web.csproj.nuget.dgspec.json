@@ -1,0 +1,313 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\projects\\web\\ESportSchool\\ESportSchool\\ESportSchool.Web.csproj": {}
+  },
+  "projects": {
+    "C:\\projects\\web\\ESportSchool\\ESportSchool.DAL\\ESportSchool.DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\web\\ESportSchool\\ESportSchool.DAL\\ESportSchool.DAL.csproj",
+        "projectName": "ESportSchool.DAL",
+        "projectPath": "C:\\projects\\web\\ESportSchool\\ESportSchool.DAL\\ESportSchool.DAL.csproj",
+        "packagesPath": "C:\\Users\\nikita\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\web\\ESportSchool\\ESportSchool.DAL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\nikita\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "C:\\projects\\web\\ESportSchool\\ESportSchool.Domain\\ESportSchool.Domain.csproj": {
+                "projectPath": "C:\\projects\\web\\ESportSchool\\ESportSchool.Domain\\ESportSchool.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[5.0.0-alpha.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\nikita\\.dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\projects\\web\\ESportSchool\\ESportSchool.Domain\\ESportSchool.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\web\\ESportSchool\\ESportSchool.Domain\\ESportSchool.Domain.csproj",
+        "projectName": "ESportSchool.Domain",
+        "projectPath": "C:\\projects\\web\\ESportSchool\\ESportSchool.Domain\\ESportSchool.Domain.csproj",
+        "packagesPath": "C:\\Users\\nikita\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\web\\ESportSchool\\ESportSchool.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\nikita\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\nikita\\.dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\projects\\web\\ESportSchool\\ESportSchool.Services\\ESportSchool.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\web\\ESportSchool\\ESportSchool.Services\\ESportSchool.Services.csproj",
+        "projectName": "ESportSchool.Services",
+        "projectPath": "C:\\projects\\web\\ESportSchool\\ESportSchool.Services\\ESportSchool.Services.csproj",
+        "packagesPath": "C:\\Users\\nikita\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\web\\ESportSchool\\ESportSchool.Services\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\nikita\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\projects\\web\\ESportSchool\\ESportSchool.Domain\\ESportSchool.Domain.csproj": {
+                "projectPath": "C:\\projects\\web\\ESportSchool\\ESportSchool.Domain\\ESportSchool.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.2, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[5.5.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[5.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\nikita\\.dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\projects\\web\\ESportSchool\\ESportSchool\\ESportSchool.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\web\\ESportSchool\\ESportSchool\\ESportSchool.Web.csproj",
+        "projectName": "ESportSchool.Web",
+        "projectPath": "C:\\projects\\web\\ESportSchool\\ESportSchool\\ESportSchool.Web.csproj",
+        "packagesPath": "C:\\Users\\nikita\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\web\\ESportSchool\\ESportSchool\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\nikita\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\projects\\web\\ESportSchool\\ESportSchool.DAL\\ESportSchool.DAL.csproj": {
+                "projectPath": "C:\\projects\\web\\ESportSchool\\ESportSchool.DAL\\ESportSchool.DAL.csproj"
+              },
+              "C:\\projects\\web\\ESportSchool\\ESportSchool.Domain\\ESportSchool.Domain.csproj": {
+                "projectPath": "C:\\projects\\web\\ESportSchool\\ESportSchool.Domain\\ESportSchool.Domain.csproj"
+              },
+              "C:\\projects\\web\\ESportSchool\\ESportSchool.Services\\ESportSchool.Services.csproj": {
+                "projectPath": "C:\\projects\\web\\ESportSchool\\ESportSchool.Services\\ESportSchool.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.49.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "React.AspNet": {
+              "target": "Package",
+              "version": "[5.2.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.11, 3.1.11]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\nikita\\.dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
