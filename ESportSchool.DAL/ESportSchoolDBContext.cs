@@ -1,13 +1,17 @@
 ﻿using System;
 using ESportSchool.Domain.Entities;
+using ESportSchool.Domain.Entities.Mapped;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Pomelo.EntityFrameworkCore.MySql;
 
 namespace ESportSchool.DAL
 {
-    public sealed class ESportSchoolDBContext : DbContext
+    public sealed class ESportSchoolDbContext : DbContext
     {
-        public DbSet<CoachProfile> CoachProfiles { get; set; }
+        private readonly IConfiguration _configuration;
+        
+        public DbSet<Coach> CoachProfiles { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Guide> Guides { get; set; }
         public DbSet<Language> Languages { get; set; }
@@ -19,14 +23,16 @@ namespace ESportSchool.DAL
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public ESportSchoolDBContext()
+        public ESportSchoolDbContext(IConfiguration configuration)
         {
+            _configuration = configuration;
             // Database.EnsureDeleted();    
-            Database.EnsureCreated();    
+            Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("Server=localhost;UId=root;Port=3306;Database=esportschool;pwd=rootsergeevich", new MySqlServerVersion(new Version(8,0,20))); //TODO move to config
+            optionsBuilder.UseLazyLoadingProxies();
+            optionsBuilder.UseNpgsql(_configuration.GetConnectionString("PostgreSQL"));
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

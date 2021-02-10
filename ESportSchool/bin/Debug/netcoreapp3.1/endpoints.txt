@@ -1,0 +1,11 @@
+﻿auth:
+api/auth/login
+api/auth/signup
+
+account:
+api/account/
+api/account/
+api/account/
+
+training:
+api/training/

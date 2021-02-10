@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using ESportSchool.Domain.Constants;
 using ESportSchool.Domain.Entities;
-using ESportSchool.Domain.Entities.NotMapped;
+using ESportSchool.Domain.Entities.Mapped;
 using ESportSchool.Domain.Repositories;
 using ESportSchool.Services.Utils;
 
@@ -15,38 +15,38 @@ namespace ESportSchool.Services
         private readonly IUserRepository _userRepository;
         private readonly ITrainingRepository _trainingRepository;
         private readonly ITeamRepository _teamRepository;
-        private readonly ICoachProfileRepository _coachProfileRepository;
+        private readonly ICoachRepository _coachRepository;
         private readonly ScheduleService _scheduleService;
 
         public TrainingService(IUserRepository userRepository,
             ITrainingRepository trainingRepository,
-            ITeamRepository teamRepository, ScheduleService scheduleService, ICoachProfileRepository coachProfileRepository)
+            ITeamRepository teamRepository, ScheduleService scheduleService, ICoachRepository coachRepository)
         {
             _userRepository = userRepository;
             _trainingRepository = trainingRepository;
             _teamRepository = teamRepository;
             _scheduleService = scheduleService;
-            _coachProfileRepository = coachProfileRepository;
+            _coachRepository = coachRepository;
         }
 
         public async Task CreateTrainingAsync(Training training, string confirmationLinkBase)
         {
             var sender = new EmailConfirmationSender(new EmailMessageBuilder(training.Coach.User));
             sender.SendMessage(training.Coach.User.Email, confirmationLinkBase + training.Id);
-            await _trainingRepository.AddAsync(training);
+            await _trainingRepository.CreateAsync(training);
         }
 
         public async Task<Training> GetTraining(int id)
         {
-            return await _trainingRepository.GetByIdAsync(id);
+            return await _trainingRepository.GetAsync(id);
         }
 
         public async Task ConfirmTrainingAsync(int trainingId)
         {
-            var training= await _trainingRepository.GetByIdAsync(trainingId);
+            var training= await _trainingRepository.GetAsync(trainingId);
             training.Accepted = true;
 
-            await _trainingRepository.UpdateAsync(training);
+            _trainingRepository.Update(training);
             
             foreach (var user in training.Participants)
             {
@@ -56,9 +56,9 @@ namespace ESportSchool.Services
             }
         }
 
-        public async Task<List<CoachProfile>> GetAvailableCoachesAsync(CoachFilter filter)
+        public async Task<List<Coach>> GetAvailableCoachesAsync(CoachFilter filter)
         {
-            return await _coachProfileRepository.GetAvailableCoachesAsync(filter); 
+            return await _coachRepository.GetAvailableCoachesAsync(filter); 
         }
     }
 }

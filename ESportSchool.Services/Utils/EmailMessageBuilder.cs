@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using ESportSchool.Domain.Entities;
+using ESportSchool.Domain.Entities.Mapped;
 
 namespace ESportSchool.Services.Utils
 {

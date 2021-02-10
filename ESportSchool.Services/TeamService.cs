@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ESportSchool.Domain.Entities;
+using ESportSchool.Domain.Entities.Mapped;
 using ESportSchool.Domain.Repositories;
 
 namespace ESportSchool.Services
@@ -16,27 +17,40 @@ namespace ESportSchool.Services
             _userRepository = userRepository;
         }
 
-        public async Task CreateTeam(Team team)
+        public async Task CreateTeamAsync(Team team)
         {
-            await _teamRepository.AddAsync(team);
+            await _teamRepository.CreateAsync(team);
+            await _teamRepository.SaveChangesAsync();
         }
 
-        public async Task<Team> GetTeam(int id)
+        public async Task<Team> GetTeamAsync(int id)
         {
-            return await _teamRepository.GetByIdAsync(id);
+            return await _teamRepository.GetAsync(id);
         }
 
-        public async Task<List<Team>> GetByName(string name)
+        public async Task<List<Team>> GetByNameAsync(string name)
         {
-            return await _teamRepository.GetByNameAsync(name);
+            return await _teamRepository.GetAsync(name);
         }
 
-        public async Task AssignUserToTeam(User user, Team team)
+        public async Task AssignUserToTeamAsync(User user, Team team)
         {
             user.Team = team;
-            await _userRepository.UpdateAsync(user);
+            _userRepository.Update(user);
 
-            await _teamRepository.AddUserAsync(team, user);
+            await _userRepository.SaveChangesAsync();
+        }
+
+        public async Task UpdateTeam(Team team)
+        {
+            _teamRepository.Update(team);
+            await _teamRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteTeam(int teamId)
+        {
+            _teamRepository.Delete(teamId);
+            await _teamRepository.SaveChangesAsync();
         }
     }
 }

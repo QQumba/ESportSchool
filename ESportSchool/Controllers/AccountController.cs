@@ -1,86 +1,91 @@
-﻿using System;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ESportSchool.Domain.Entities;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Mvc;
+using ESportSchool.Domain.Entities.Mapped;
 using ESportSchool.Services;
+using ESportSchool.Web.Jwt;
 using ESportSchool.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 
 namespace ESportSchool.Web.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/account")]
-    public class AccountController : ControllerBase
+    public class AccountController : JwtController
     {
-        private readonly IConfiguration _configuration;
         private readonly UserService _userService;
-
-        public AccountController(UserService userService, IConfiguration configuration)
+        private readonly TeamService _teamService;
+        
+        public AccountController(UserService userService, TeamService teamService)
         {
             _userService = userService;
-            _configuration = configuration;
+            _teamService = teamService;
+        }
+
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> Index()
+        {
+            var user = await _userService.GetUserAsync(Email);
+            var coach = user.Coach;
+            
+            return Ok(user);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("user/{userId}")]
+        public async Task<IActionResult> GetUser([FromRoute] int userId)
+        {
+            var user = await _userService.GetUserAsync(userId);
+            return Ok(user);
         }
 
         [HttpPost]
-        [Route("login")]
-        public async Task<IActionResult> Login([FromBody] AuthorizationViewModel model)
+        public async Task<IActionResult> CreateCoachProfile([FromBody] CoachViewModel model)
         {
-            var token = await Authenticate(model);
-            if (token == null)
+            var user = await _userService.GetUserAsync(User.Identity.Name);
+            var profile = new Coach
             {
-                return BadRequest(new {errorText = "Invalid email or password."});
-            }
-
-            return Ok(token);
+                GameProfiles = model.GameProfiles,
+                Language = model.Language,
+                User = user,
+            };
+            await _userService.CreateCoachAccountAsync(profile);
+            return Ok();
+        }
+        
+        [HttpPost]
+        [Route("modify")]
+        public async Task ModifyProfile(User user)
+        {
+            await _userService.UpdateUserAsync(user);
         }
 
         [HttpPost]
-        [Route("sign-up")]
-        public async Task<IActionResult> SignUp([FromBody] AuthorizationViewModel model)
+        [Route("team")]
+        public async Task PickTeam([FromBody] Team team)
         {
-            var user = await _userService.GetUserAsync(model.Email);
-            if (user == null)
+            var user = await _userService.GetUserAsync(User.Identity.Name);
+            user.Team = team;
+            await _userService.UpdateUserAsync(user);
+        }
+
+        [HttpPost]
+        [Route("schedule")]
+        public async Task<IActionResult> SetSchedule([FromBody] List<ScheduleInterval> schedule)
+        {
+            var user = await _userService.GetUserAsync(User.Identity.Name);
+            if (user?.Coach == null)
             {
-                user = new User()
-                {
-                    Email = model.Email,
-                    Password = model.Password
-                };
-                await _userService.CreateNewUserAsync(user);
-                var token = await Authenticate(model);
-                if (token == null)
-                {
-                    throw new Exception("Can not authenticate user.");
-                }
-
-                return Ok(token);
+                return BadRequest(new {errorText = "Your should create coach account first."});
             }
-
-            return BadRequest(new {errorText = "User with specified email already exist."});
+            user.Coach.Schedule = schedule;
+            await _userService.UpdateUserAsync(user);
+            return Ok();
         }
-
-        [Authorize]
-        [HttpPost]
-        [Route("logout")]
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync();
-            return RedirectToAction("Index", "Home");
-        }
-
-        private async Task<string> Authenticate(AuthorizationViewModel model)
-        {
-            var user = await _userService.GetUserIfVerified(model.Email, model.Password);
-            if (user == null) return null;
-
-            var provider = new JwtProvider(_configuration);
-            var token = provider.GenerateJwtToken(user);
-
-            return await Task.FromResult(token);
-        }
-
     }
 }

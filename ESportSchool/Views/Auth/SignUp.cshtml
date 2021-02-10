@@ -1,0 +1,12 @@
+﻿@using ESportSchool.Web.ViewModels;
+@model SignupViewModel
+
+    <form asp-controller="Auth" asp-action="SignUp" method="post">
+        <label>Email</label>
+        <input type="email" name="Email" @Html.ValueFor(m => m.Email)/>
+        <label>Name</label>
+        <input type="text" name="Login" @Html.ValueFor(m => m.Login)/>
+        <label>Password</label>
+        <input type="password" name="Password" @Html.ValueFor(m => m.Password)/>
+        <input type="submit" />
+    </form>

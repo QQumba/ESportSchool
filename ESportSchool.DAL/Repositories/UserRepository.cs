@@ -4,24 +4,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ESportSchool.Domain.Entities.Mapped;
 using ESportSchool.Domain.Repositories;
 
 namespace ESportSchool.DAL.Repositories
 {
     public class UserRepository : Repository<User>, IUserRepository
     {
-        public UserRepository(ESportSchoolDBContext context)
+        public UserRepository(ESportSchoolDbContext context)
             : base(context)
         {
         }
 
-        public async Task<User> GetByEmailOrDefaultAsync(string email)
+        public async Task<User> GetAsync(string email)
         {
             return await Set.FirstOrDefaultAsync(u => u.Email == email);
         }
 
 
-        public async Task TopUpBalanceAsync(User user, float value)
+        public void TopUp(User user, decimal value)
         {
             if (value < 0)
             {
@@ -34,10 +35,10 @@ namespace ESportSchool.DAL.Repositories
             }
 
             user.Balance += value;
-            await UpdateAsync(user);
+            Update(user);
         }
 
-        public async Task WithdrawAsync(User user, float value)
+        public void Withdraw(User user, decimal value)
         {
             if (user.Balance - value < 0)
             {
@@ -50,7 +51,7 @@ namespace ESportSchool.DAL.Repositories
             }
 
             user.Balance -= value;
-            await UpdateAsync(user);
+            Update(user);
         }
     }
 }

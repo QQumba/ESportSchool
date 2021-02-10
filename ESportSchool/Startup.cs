@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -50,7 +51,7 @@ namespace ESportSchool.Web
             services.AddRazorPages();
             
             //add repositories
-            services.AddScoped<ICoachProfileRepository, CoachProfileRepository>();
+            services.AddScoped<ICoachRepository, CoachRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IGuideRepository, GuideRepository>();
             services.AddScoped<INewsRepository, NewsRepository>();
@@ -64,8 +65,9 @@ namespace ESportSchool.Web
             services.AddScoped<ScheduleService>();
             services.AddScoped<TrainingService>();
             services.AddScoped<UserService>();
-            
-            services.AddScoped<DAL.ESportSchoolDBContext>();
+            services.AddScoped<TeamService>();
+
+            services.AddScoped<DAL.ESportSchoolDbContext>();
         }
 
 

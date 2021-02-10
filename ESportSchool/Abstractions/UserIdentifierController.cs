@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ESportSchool.Domain.Entities;
+using ESportSchool.Domain.Entities.Mapped;
 using ESportSchool.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp;

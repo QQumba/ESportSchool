@@ -1,26 +1,27 @@
 ﻿using System.Threading.Tasks;
 using ESportSchool.Domain.Entities;
+using ESportSchool.Domain.Entities.Mapped;
 using ESportSchool.Domain.Repositories;
 
 namespace ESportSchool.Services
 {
     public class PaymentService
     {
-        private IUserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
         public PaymentService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
         
-        public async Task TopUpBalanceAsync(User user, float value)
+        public void TopUpBalanceAsync(User user, decimal value)
         {
-            await _userRepository.TopUpBalanceAsync(user, value);
+            _userRepository.TopUp(user, value);
         }
 
-        public async Task WithdrawAsync(User user, float value)
+        public void WithdrawAsync(User user, decimal value)
         {
-            await _userRepository.WithdrawAsync(user, value);
+            _userRepository.Withdraw(user, value);
         }
     }
 }

@@ -1,45 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using ESportSchool.Domain.Entities;
-using ESportSchool.Domain.Entities.NotMapped;
 using ESportSchool.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace ESportSchool.DAL.Repositories
 {
     public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
-        private readonly ESportSchoolDBContext _db;
+        private readonly ESportSchoolDbContext _db;
         private DbSet<TEntity> _set;
 
-        protected Repository(ESportSchoolDBContext context)
+        protected Repository(ESportSchoolDbContext context)
         {
             _db = context;
         }
 
         protected DbSet<TEntity> Set => _set ??= _db.Set<TEntity>();
 
-        protected async Task SaveChangesAsync()
-        {
-            await _db.SaveChangesAsync();
-        }
-
-        protected void SaveChanges()
-        {
-            _db.SaveChanges();
-        }
-
-        public async Task AddAsync(TEntity e)
+        public async Task CreateAsync(TEntity e)
         {
             e.CreationTimestamp = DateTime.Now;
             e.LastUpdateTimestamp = e.CreationTimestamp;
             await Set.AddAsync(e);
-            await SaveChangesAsync();
         }
 
-        public async Task<TEntity> GetByIdAsync(int id)
+        public async Task<TEntity> GetAsync(int id)
         {
             return await Set.FirstOrDefaultAsync(e => e.Id == id);
         }
@@ -54,17 +42,39 @@ namespace ESportSchool.DAL.Repositories
             return await Set.Skip(skip).Take(take).ToListAsync();
         }
 
-        public async Task UpdateAsync(TEntity e)
+        public void Update(TEntity e)
         {
             e.LastUpdateTimestamp = DateTime.Now;
             Set.Update(e);
-            await SaveChangesAsync();
         }
 
-        public void Remove(TEntity e)
+        public void Delete(int id)
+        {
+            var entity = Set.FirstOrDefault(e => e.Id == id);
+            if (entity != null)
+            {
+                Set.Remove(entity);
+            }
+        }
+
+        public void Delete(TEntity e)
         {
             Set.Remove(e);
-            SaveChanges();
+        }
+
+        public void DeleteRange(IEnumerable<TEntity> e)
+        {
+            Set.RemoveRange(e);
+        }
+        
+        public async Task SaveChangesAsync()
+        {
+            await _db.SaveChangesAsync();
+        }
+
+        protected void SaveChanges()
+        {
+            _db.SaveChanges();
         }
     }
 }
