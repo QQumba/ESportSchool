@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using ESportSchool.Domain.Entities.Mapped;
 using ESportSchool.Domain.Repositories;
@@ -14,9 +15,9 @@ namespace ESportSchool.DAL.Repositories
         {
         }
 
-        public async Task<List<ScheduleInterval>> GetOutdatedIntervalsAsync()
+        public async Task<List<ScheduleInterval>> GetOutdatedIntervalsAsync(CancellationToken ct = default)
         {
-            return await Set.Where(i => i.RepeatWeekly == false && i.Start < DateTime.Now).ToListAsync();
+            return await Set.Where(i => i.RepeatWeekly == false && i.Start < DateTime.Now).ToListAsync(cancellationToken: ct);
         }
     }
 }

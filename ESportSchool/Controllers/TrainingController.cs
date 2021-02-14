@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using ESportSchool.Domain.Entities;
 using ESportSchool.Domain.Entities.Mapped;
 using ESportSchool.Services;
+using ESportSchool.Services.DataAccess;
 using ESportSchool.Web.ViewModels;
+using ESportSchool.Web.ViewModels.Api;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -52,10 +54,7 @@ namespace ESportSchool.Web.Controllers
 
             var training = new Training()
             {
-                Coach = model.Coach,
-                Start = model.Interval.Start,
-                Duration = model.Interval.Duration,
-                Participants = participants
+                
             };
             await _trainingService.CreateTrainingAsync(training, "training/confirm/");
             return Ok();
@@ -75,10 +74,7 @@ namespace ESportSchool.Web.Controllers
 
             var training = new Training()
             {
-                Coach = model.Coach,
-                Start = model.Interval.Start,
-                Duration = model.Interval.Duration,
-                Participants = participants,
+            
             };
             await _trainingService.CreateTrainingAsync(training, "training/confirm/");
             return Ok();

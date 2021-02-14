@@ -4,6 +4,7 @@ using System.Text;
 using ESportSchool.DAL.Repositories;
 using ESportSchool.Domain.Repositories;
 using ESportSchool.Services;
+using ESportSchool.Services.DataAccess;
 using ESportSchool.Services.Utils;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,7 +15,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace ESportSchool.Web
 {
@@ -29,7 +32,6 @@ namespace ESportSchool.Web
         
         public void ConfigureServices(IServiceCollection services)
         {
-            Console.WriteLine(Configuration["Jwt:Key"]);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -47,7 +49,10 @@ namespace ESportSchool.Web
                     };
                 });
             
-            services.AddControllersWithViews();
+            services.AddControllers().AddNewtonsoftJson(o =>
+            {
+                o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
             services.AddRazorPages();
             
             //add repositories
@@ -60,23 +65,29 @@ namespace ESportSchool.Web
             services.AddScoped<ITeamRepository, TeamRepository>();
             services.AddScoped<ITrainingRepository, TrainingRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IGameProfileRepository, GameProfileRepository>();
             //add services
             services.AddScoped<PaymentService>();
             services.AddScoped<ScheduleService>();
             services.AddScoped<TrainingService>();
             services.AddScoped<UserService>();
             services.AddScoped<TeamService>();
+            services.AddScoped<CoachService>();
+            services.AddScoped<GameProfileService>();
+            services.AddScoped<CommentService>();
 
             services.AddScoped<DAL.ESportSchoolDbContext>();
         }
 
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            logger.LogInformation("logger test.");
             
             app.UseHttpsRedirection();
             app.UseStaticFiles();

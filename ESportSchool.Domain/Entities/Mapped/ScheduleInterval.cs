@@ -9,7 +9,7 @@ namespace ESportSchool.Domain.Entities.Mapped
         public bool RepeatWeekly { get; set; } = false;
 
         //relations
-        public Coach Coach { get; set; }
+        public virtual Coach Coach { get; set; }
 
 
         public bool IsOverlapped(ScheduleInterval other)

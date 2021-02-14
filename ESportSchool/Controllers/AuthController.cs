@@ -6,6 +6,7 @@ using ESportSchool.Domain.Entities.Mapped;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using ESportSchool.Services;
+using ESportSchool.Services.DataAccess;
 using ESportSchool.Web.Jwt;
 using ESportSchool.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;

@@ -8,6 +8,6 @@ namespace ESportSchool.Domain.Entities.Mapped
         public string ImagePath { get; set; }
 
         //relations
-        public List<Coach> Profiles { get; set; }
+        public virtual List<Coach> Profiles { get; set; }
     }
 }

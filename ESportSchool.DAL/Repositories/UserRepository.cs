@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using ESportSchool.Domain.Entities.Mapped;
 using ESportSchool.Domain.Repositories;
@@ -16,13 +17,13 @@ namespace ESportSchool.DAL.Repositories
         {
         }
 
-        public async Task<User> GetAsync(string email)
+        public async Task<User> GetAsync(string email, CancellationToken ct = default)
         {
-            return await Set.FirstOrDefaultAsync(u => u.Email == email);
+            return await Set.FirstOrDefaultAsync(u => u.Email == email, cancellationToken: ct);
         }
 
 
-        public void TopUp(User user, decimal value)
+        public async Task TopUpAsync(User user, decimal value, CancellationToken ct)
         {
             if (value < 0)
             {
@@ -35,10 +36,10 @@ namespace ESportSchool.DAL.Repositories
             }
 
             user.Balance += value;
-            Update(user);
+            await UpdateAsync(user, ct);
         }
 
-        public void Withdraw(User user, decimal value)
+        public async Task WithdrawAsync(User user, decimal value, CancellationToken ct)
         {
             if (user.Balance - value < 0)
             {
@@ -51,7 +52,7 @@ namespace ESportSchool.DAL.Repositories
             }
 
             user.Balance -= value;
-            Update(user);
+            await UpdateAsync(user, ct);
         }
     }
 }

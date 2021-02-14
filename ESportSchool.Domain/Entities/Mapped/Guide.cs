@@ -1,10 +1,12 @@
-﻿namespace ESportSchool.Domain.Entities.Mapped
+﻿using ESportSchool.Domain.Constants;
+
+namespace ESportSchool.Domain.Entities.Mapped
 {
     public class Guide : BaseEntity
     {
         public string HtmlBody { get; set; }
-        
+        public Game Game { get; set; }
         //relations
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }

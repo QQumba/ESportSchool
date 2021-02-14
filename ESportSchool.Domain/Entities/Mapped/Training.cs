@@ -11,7 +11,7 @@ namespace ESportSchool.Domain.Entities.Mapped
         public bool Accepted { get; set; }
         
         //relations
-        public Coach Coach { get; set; }
-        public List<User> Participants { get; set; }
+        public virtual Coach Coach { get; set; }
+        public virtual List<User> Participants { get; set; }
     }
 }

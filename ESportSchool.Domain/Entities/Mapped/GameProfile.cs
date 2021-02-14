@@ -8,5 +8,7 @@ namespace ESportSchool.Domain.Entities.Mapped
         public string About { get; set; }
         public string Rank { get; set; }
         public string AdditionalRankInfo { get; set; }
+
+        public virtual Coach Coach { get; set; }
     }
 }

@@ -5,6 +5,6 @@
         public string Value { get; set; }
         
         //relations
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }

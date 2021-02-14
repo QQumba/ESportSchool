@@ -1,21 +1,19 @@
-﻿using ESportSchool.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ESportSchool.Domain.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task CreateAsync(TEntity e);
-        Task<TEntity> GetAsync(int id);
-        Task<List<TEntity>> GetAllAsync();
-        Task<List<TEntity>> PageAsync(int skip, int take);
-        void Update(TEntity e);
-        void Delete(TEntity e);
-        void Delete(int id);
-        void DeleteRange(IEnumerable<TEntity> e);
-        Task SaveChangesAsync();
+        Task CreateAsync(TEntity e, CancellationToken ct = default);
+        public Task CreateRangeAsync(IEnumerable<TEntity> e, CancellationToken ct = default);
+        Task<TEntity> GetAsync(int id, CancellationToken ct = default);
+        Task<List<TEntity>> GetAllAsync(CancellationToken ct = default);
+        Task<List<TEntity>> PageAsync(int skip, int take, CancellationToken ct = default);
+        Task UpdateAsync(TEntity e, CancellationToken ct = default);
+        Task DeleteAsync(TEntity e, CancellationToken ct = default);
+        Task DeleteAsync(int id, CancellationToken ct = default);
+        Task DeleteRangeAsync(IEnumerable<TEntity> e, CancellationToken ct = default);
     }
 }

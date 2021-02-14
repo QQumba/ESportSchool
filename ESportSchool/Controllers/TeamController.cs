@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ESportSchool.DAL;
 using ESportSchool.Domain.Entities.Mapped;
 using ESportSchool.Services;
+using ESportSchool.Services.DataAccess;
 using ESportSchool.Web.Jwt;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,14 +20,12 @@ namespace ESportSchool.Web.Controllers
     public class TeamController : JwtController
     {
         private readonly TeamService _teamService;
-        private readonly UserService _userService;
 
         private readonly IConfiguration _configuration;
 
-        public TeamController(TeamService teamService, UserService userService, IConfiguration configuration)
+        public TeamController(TeamService teamService, UserService userService, IConfiguration configuration) : base(userService)
         {
             _teamService = teamService;
-            _userService = userService;
             _configuration = configuration;
         }
 
@@ -34,13 +33,13 @@ namespace ESportSchool.Web.Controllers
         [Route("create")]
         public async Task<IActionResult> Create([FromBody] Team team)
         {
-            var user = await _userService.GetUserAsync(Email);
+            var user = await GetCurrentUserAsync();
 
+            await _teamService.CreateTeamAsync(team);
             user.Team = team;
             user.IsTeamLeader = true;
             
-            await _teamService.CreateTeamAsync(team);
-            await _userService.UpdateUserAsync(user);
+            await UserService.UpdateUserAsync(user);
                 
             return Ok(team.Id);
         }
@@ -49,7 +48,7 @@ namespace ESportSchool.Web.Controllers
         [Route("")]
         public async Task<IActionResult> Get()
         {
-            var user = await _userService.GetUserAsync(Email);
+            var user = await GetCurrentUserAsync();
             return Ok(user.Team);
         }
 
@@ -67,17 +66,30 @@ namespace ESportSchool.Web.Controllers
         }
 
         [HttpPut]
-        [Route("{teamId}")]
-        public async Task Update([FromBody] Team team)
+        [Route("")]
+        public async Task Update([FromBody] Team teamModel)
         {
-            await _teamService.UpdateTeam(team);
+            var user = await GetCurrentUserAsync();
+            if (user.IsTeamLeader)
+            {
+                var team = user.Team;
+                team.Title = teamModel.Title;
+                team.Description = teamModel.Description;
+                
+                await _teamService.UpdateTeam(team);
+            }
         }
         
         [HttpDelete]
-        [Route("{teamId}")]
-        public async Task Delete([FromRoute] int teamId)
+        [Route("")]
+        public async Task Delete()
         {
-            await _teamService.DeleteTeam(teamId);
+            var user = await GetCurrentUserAsync();
+            if (user.IsTeamLeader)
+            {
+                user.IsTeamLeader = false;
+                await _teamService.DeleteTeam(user.Team);
+            }
         }
     }
 }

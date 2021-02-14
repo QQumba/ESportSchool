@@ -7,16 +7,16 @@ namespace ESportSchool.Domain.Entities.Mapped
 {
     public class Coach : BaseEntity
     {
-        public List<GameProfile> GameProfiles { get; set; } 
-        public string Rate { get; set; }
+        public virtual List<GameProfile> GameProfiles { get; set; } 
+        public int Rate { get; set; }
 
         //relations
         [ForeignKey("user")]
-        public User User { get; set; }
-        public Language Language { get; set; }
-        public List<Comment> Comments { get; set; }
-        public List<Training> Trainings { get; set; }
-        public List<ScheduleInterval> Schedule { get; set; }
+        public virtual User User { get; set; }
+        public virtual List<Language> Languages { get; set; }
+        public virtual List<Comment> Comments { get; set; }
+        public virtual List<Training> Trainings { get; set; }
+        public virtual List<ScheduleInterval> Schedule { get; set; }
 
         [NotMapped]
         public List<ScheduleInterval> TrainingsSchedule

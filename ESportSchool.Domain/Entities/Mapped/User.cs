@@ -28,12 +28,12 @@ namespace ESportSchool.Domain.Entities.Mapped
         public bool HasConfirmedEmail { get; set; } = false;
 
         //relations 
-        public Coach Coach { get; set; }
-        public List<Comment> Comments { get; set; }
-        public List<Guide> Guides { get; set; }
-        public List<Training> Trainings { get; set; }
-        public List<Transaction> Transactions { get; set; }
-        public List<Review> Reviews { get; set; }
+        public virtual Coach Coach { get; set; }
+        public virtual List<Comment> Comments { get; set; }
+        public virtual List<Guide> Guides { get; set; }
+        public virtual List<Training> Trainings { get; set; }
+        public virtual List<Transaction> Transactions { get; set; }
+        public virtual List<Review> Reviews { get; set; }
         public virtual Team Team { get; set; }
         public bool IsTeamLeader { get; set; }
         

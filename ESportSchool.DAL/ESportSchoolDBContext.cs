@@ -36,6 +36,15 @@ namespace ESportSchool.DAL
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ScheduleInterval>()
+                .HasOne<Coach>()
+                .WithMany(c => c.Schedule)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<GameProfile>()
+                .HasOne<Coach>()
+                .WithMany(c => c.GameProfiles)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

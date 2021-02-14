@@ -3,9 +3,9 @@
     public class Comment : BaseEntity
     {
         public string Value { get; set; }
-        
+        public bool Edited { get; set; }
         //relations
-        public Coach Coach { get; set; }
-        public User Writer { get; set; }
+        public virtual Coach Coach { get; set; }
+        public virtual User User { get; set; }
     }
 }

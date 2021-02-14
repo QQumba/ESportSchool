@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using ESportSchool.Domain.Entities;
 using ESportSchool.Domain.Repositories;
@@ -20,56 +21,67 @@ namespace ESportSchool.DAL.Repositories
 
         protected DbSet<TEntity> Set => _set ??= _db.Set<TEntity>();
 
-        public async Task CreateAsync(TEntity e)
+        public async Task CreateAsync(TEntity e, CancellationToken ct = default)
         {
             e.CreationTimestamp = DateTime.Now;
             e.LastUpdateTimestamp = e.CreationTimestamp;
-            await Set.AddAsync(e);
+            await Set.AddAsync(e, ct);
+            await SaveChangesAsync(ct);
         }
 
-        public async Task<TEntity> GetAsync(int id)
+        public async Task CreateRangeAsync(IEnumerable<TEntity> e, CancellationToken ct = default)
         {
-            return await Set.FirstOrDefaultAsync(e => e.Id == id);
+            await Set.AddRangeAsync(e, ct);
+            await SaveChangesAsync(ct);
         }
 
-        public async Task<List<TEntity>> GetAllAsync()
+        public Task<TEntity> GetAsync(int id, CancellationToken ct = default)
         {
-            return await Set.Select(e => e).ToListAsync();
+            return Set.FirstOrDefaultAsync(e => e.Id == id, cancellationToken: ct);
         }
 
-        public async Task<List<TEntity>> PageAsync(int skip, int take)
+        public Task<List<TEntity>> GetAllAsync(CancellationToken ct = default)
         {
-            return await Set.Skip(skip).Take(take).ToListAsync();
+            return Set.Select(e => e).ToListAsync(cancellationToken: ct);
         }
 
-        public void Update(TEntity e)
+        public Task<List<TEntity>> PageAsync(int skip, int take, CancellationToken ct = default)
+        {
+            return Set.Skip(skip).Take(take).ToListAsync(cancellationToken: ct);
+        }
+
+        public async Task UpdateAsync(TEntity e, CancellationToken ct = default)
         {
             e.LastUpdateTimestamp = DateTime.Now;
             Set.Update(e);
+            await SaveChangesAsync(ct);
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id, CancellationToken ct = default)
         {
             var entity = Set.FirstOrDefault(e => e.Id == id);
             if (entity != null)
             {
                 Set.Remove(entity);
+                await SaveChangesAsync(ct);
             }
         }
 
-        public void Delete(TEntity e)
+        public async Task DeleteAsync(TEntity e, CancellationToken ct = default)
         {
             Set.Remove(e);
+            await SaveChangesAsync(ct);
         }
 
-        public void DeleteRange(IEnumerable<TEntity> e)
+        public async Task DeleteRangeAsync(IEnumerable<TEntity> e, CancellationToken ct = default)
         {
             Set.RemoveRange(e);
+            await SaveChangesAsync(ct);
         }
         
-        public async Task SaveChangesAsync()
+        protected async Task SaveChangesAsync(CancellationToken ct = default)
         {
-            await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync(ct);
         }
 
         protected void SaveChanges()

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
-using ESportSchool.Domain.Constants;
 using ESportSchool.Domain.Entities;
 using ESportSchool.Domain.Entities.Mapped;
 using ESportSchool.Domain.Repositories;
@@ -16,12 +15,12 @@ namespace ESportSchool.DAL.Repositories
         {
         }
 
-        public async Task<List<Coach>> GetAvailableCoachesAsync(CoachFilter filter)
+        public async Task<List<Coach>> GetAvailableCoachesAsync(CoachFilter filter, CancellationToken ct = default)
         {
             List<Coach> coaches = null;
             coaches = await Set.Where(c => c.GameProfiles.FirstOrDefault(p => p.Game == filter.Game) != null)
-                .Where(c => c.Language == filter.Language)
-                .ToListAsync();
+                .Where(c => c.Languages.Contains(filter.Language))
+                .ToListAsync(cancellationToken: ct);
 
             return coaches?.Where(c => c.IsScheduleIntervalAvailable(new ScheduleInterval()
             {

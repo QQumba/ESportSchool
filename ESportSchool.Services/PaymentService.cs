@@ -16,12 +16,12 @@ namespace ESportSchool.Services
         
         public void TopUpBalanceAsync(User user, decimal value)
         {
-            _userRepository.TopUp(user, value);
+            _userRepository.TopUpAsync(user, value);
         }
 
         public void WithdrawAsync(User user, decimal value)
         {
-            _userRepository.Withdraw(user, value);
+            _userRepository.WithdrawAsync(user, value);
         }
     }
 }
