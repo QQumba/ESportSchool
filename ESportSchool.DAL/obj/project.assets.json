@@ -6098,16 +6098,19 @@
       "outputPath": "C:\\projects\\web\\ESportSchool\\ESportSchool.DAL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\nikita\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\nikita\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
           "projectReferences": {
             "C:\\projects\\web\\ESportSchool\\ESportSchool.Domain\\ESportSchool.Domain.csproj": {
               "projectPath": "C:\\projects\\web\\ESportSchool\\ESportSchool.Domain\\ESportSchool.Domain.csproj"
@@ -6123,6 +6126,7 @@
     },
     "frameworks": {
       "netstandard2.1": {
+        "targetAlias": "netstandard2.1",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Proxies": {
             "target": "Package",
@@ -6152,7 +6156,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.405\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

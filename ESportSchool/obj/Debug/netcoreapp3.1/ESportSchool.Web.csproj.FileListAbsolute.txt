@@ -299,7 +299,6 @@ C:\projects\web\ESportSchool\ESportSchool\obj\Debug\netcoreapp3.1\ESportSchool.W
 C:\projects\web\ESportSchool\ESportSchool\obj\Debug\netcoreapp3.1\ESportSchool.Web.genruntimeconfig.cache
 C:\projects\web\ESportSchool\ESportSchool\bin\Debug\netcoreapp3.1\Npgsql.dll
 C:\projects\web\ESportSchool\ESportSchool\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
-C:\projects\web\ESportSchool\ESportSchool\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\projects\web\ESportSchool\ESportSchool\bin\Debug\netcoreapp3.1\endpoints.txt
 C:\projects\web\ESportSchool\ESportSchool\bin\Debug\netcoreapp3.1\Castle.Core.dll
 C:\projects\web\ESportSchool\ESportSchool\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll
@@ -308,3 +307,4 @@ C:\projects\web\ESportSchool\ESportSchool\bin\Debug\netcoreapp3.1\Microsoft.AspN
 C:\projects\web\ESportSchool\ESportSchool\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\projects\web\ESportSchool\ESportSchool\bin\Debug\netcoreapp3.1\Mapster.dll
 C:\projects\web\ESportSchool\ESportSchool\bin\Debug\netcoreapp3.1\Mapster.Core.dll
+C:\projects\web\ESportSchool\ESportSchool\obj\Debug\netcoreapp3.1\scopedcss\bundle\ESportSchool.Web.styles.css

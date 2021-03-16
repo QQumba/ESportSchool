@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ESportSchool.Domain", "ESpo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESportSchool.Services", "ESportSchool.Services\ESportSchool.Services.csproj", "{2036DD2F-5B27-454C-97FC-BC7CEC06E593}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESportSchool.Test", "ESportSchool.Test\ESportSchool.Test.csproj", "{FEAD0C99-BAC1-46FC-8AA0-8FA7D9A3A641}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESportSchool.Web.Api", "ESportSchool.Web.Api\ESportSchool.Web.Api.csproj", "{1AED559C-1149-40F5-B681-97C432E5B0F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{2036DD2F-5B27-454C-97FC-BC7CEC06E593}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2036DD2F-5B27-454C-97FC-BC7CEC06E593}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2036DD2F-5B27-454C-97FC-BC7CEC06E593}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEAD0C99-BAC1-46FC-8AA0-8FA7D9A3A641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEAD0C99-BAC1-46FC-8AA0-8FA7D9A3A641}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEAD0C99-BAC1-46FC-8AA0-8FA7D9A3A641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEAD0C99-BAC1-46FC-8AA0-8FA7D9A3A641}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AED559C-1149-40F5-B681-97C432E5B0F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AED559C-1149-40F5-B681-97C432E5B0F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AED559C-1149-40F5-B681-97C432E5B0F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AED559C-1149-40F5-B681-97C432E5B0F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

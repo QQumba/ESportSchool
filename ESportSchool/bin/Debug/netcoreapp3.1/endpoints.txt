@@ -2,10 +2,10 @@
 api/auth/login
 api/auth/signup
 
-account:
-api/account/
-api/account/
-api/account/
+user:
+api/user/{userId}
+api/user/
+api/user/
 
 training:
 api/training/
@@ -14,5 +14,4 @@ comment:
 api/comment/{coachId}         [post]
 api/comment/{commentId}       [get]
 api/comment/user/{userId}     [get]
-api/comment/userTest/{userId} [get]
 api/comment/coach/{coachId}   [get]

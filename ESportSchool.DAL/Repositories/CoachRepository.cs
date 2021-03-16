@@ -15,18 +15,18 @@ namespace ESportSchool.DAL.Repositories
         {
         }
 
-        public async Task<List<Coach>> GetAvailableCoachesAsync(CoachFilter filter, CancellationToken ct = default)
+        public Task<List<Coach>> GetAvailableCoachesAsync(CoachFilter filter, CancellationToken ct = default)
         {
-            List<Coach> coaches = null;
-            coaches = await Set.Where(c => c.GameProfiles.FirstOrDefault(p => p.Game == filter.Game) != null)
+            return Set
+                .Where(c => c.GameProfiles.FirstOrDefault(p => p.Game == filter.Game) != null)
                 .Where(c => c.Languages.Contains(filter.Language))
+                .Where(c => c.IsScheduleIntervalAvailable(
+                    new ScheduleInterval()
+                    {
+                        Start = filter.Start,
+                        Duration = filter.Duration,
+                    }))
                 .ToListAsync(cancellationToken: ct);
-
-            return coaches?.Where(c => c.IsScheduleIntervalAvailable(new ScheduleInterval()
-            {
-                Start = filter.Start,
-                Duration = filter.Duration,
-            })).ToList();
         }
     }
 }
